@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable max-len */
+
 // Input:
 // C:\Users\m_a_j\AppData\Local\Packages\Microsoft.MinecraftUWP_8wekyb3d8bbwe\LocalState\games\com.mojang\minecraftWorlds\VoidTest\db\001469.ldb
 // Output:
@@ -19,10 +20,10 @@ const validPath = (filePath) => {
   // select file filePath selector for unix
   const validUnix = /(^[a-zA-Z]\/)?([\w-.]+\/)+([\w-.]+\.[a-zA-Z0-9]{1,4})$/gm;
   // select file filePath selector for windows
-  const validWindows = /^([A-Z]:\\)?([\w-.]+\\)+([\w-.]+\.[a-zA-Z0-9]{1,4})$/gm;
+  const validWindows = /(^[A-Z]:\\)?([\w-.]+\\)+([\w-.]+\.[a-zA-Z0-9]{1,4})$/gm;
   // if return for Unix regex match is the same length as the input filePath
   // if return for Windows regex match is the same length as the input filePath
-  if (filePath.match(validWindows || validUnix)[0].length === filePath.length) {
+  if (filePath.match(validUnix)[0].length === filePath.length || filePath.match(validWindows)[0].length === filePath.length) {
     // return input filePath
     return filePath;
   }
@@ -53,14 +54,13 @@ const updateWindowsPath = (filePath) => {
 // function that checks which filePath to switch to
 const whichPath = (filePath) => {
   // const windows = /([a-z]:)/i;
-  const unix = /([a-z]\/)/i;
-
+  // const unix = /([a-z]\/)/i;
   // if filePath is not valid return invalidity
   if (validPath(filePath) === false) {
     return 'Not a valid path';
   }
   // if filePath is not windows
-  if (unix.test(filePath)) {
+  if (filePath.includes('/')) {
     // return windows filePath function result
     return updateWindowsPath(filePath);
     // otherwise
