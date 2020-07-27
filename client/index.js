@@ -107,11 +107,30 @@ const updateUnixPath = (filePath) => {
 
 // function to change to a windows filePath
 const updateWindowsPath = (filePath) => {
-  // replace unix drive and slashes
-  filePath = filePath.replace(/([a-z])/i, '$1:').replace(/(\/+)/g, '\\');
-  // make the first character uppercase
-  filePath = filePath.charAt(0).toUpperCase() + filePath.slice(1);
-  // return the completed filePath
+  // starts with /mnt/ or single drive letter
+  const mount = /^(\/mnt)/;
+  const driveLetter = /^((\/)?[a-z]\/)/;
+  // const directory = /^(\/[\w\s-.]+)\//;
+  // const file = /^((\/)?[\w\s-.]+).[a-zA-Z0-9]{1,4}/;
+
+  // FIX THIS FUNCTION
+  if (mount.test(filePath)) {
+    filePath = filePath.replace(/^(\/mnt\/)([a-z])/, '$2:').replace(/(\/+)/g, '\\');
+    filePath = filePath.charAt(0).toUpperCase() + filePath.slice(1);
+    return filePath;
+  }
+
+  if (driveLetter.test(filePath)) {
+    filePath = filePath.replace(/^(\/)?([a-z])/, '$2:').replace(/(\/+)/g, '\\');
+    filePath = filePath.charAt(0).toUpperCase() + filePath.slice(1);
+    return filePath;
+  }
+
+  // if (directory.test(filePath) || file.test(filePath)) {
+  //   filePath = filePath.replace(/(\/+)/g, '\\');
+  //   return filePath;
+  // }
+  filePath = filePath.replace(/(\/+)/g, '\\');
   return filePath;
 };
 
