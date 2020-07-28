@@ -39,7 +39,7 @@
   001469.ldb
 
   Output:
-    Windows -> Linux: c/Users/m_a_j/AppData/Local/Packages/Microsoft.MinecraftUWP_8wekyb3d8bbwe/LocalState/games/com.mojang/minecraftWorlds/VoidTest/db/001469.ldb
+    Windows -> Linux: /mnt/c/Users/m_a_j/AppData/Local/Packages/Microsoft.MinecraftUWP_8wekyb3d8bbwe/LocalState/games/com.mojang/minecraftWorlds/VoidTest/db/001469.ldb
     Linux -> Windows: C:\Users\m_a_j\AppData\Local\Packages\Microsoft.MinecraftUWP_8wekyb3d8bbwe\LocalState\games\com.mojang\minecraftWorlds\VoidTest\db\001469.ldb
 */
 
@@ -55,9 +55,9 @@ const text = fs.readFileSync(path.join(__dirname, 'path.txt')).toString('utf-8')
 // filePath validator function
 const validPath = (filePath) => {
   // select file filePath selector for unix
-  const validUnix = /(^[a-z])?((\/)?([\w\s-.]+))*(((\/)?[\w\s-.]+)\.[a-zA-Z0-9]{1,4})$/gm;
+  const validUnix = /(^[a-z])?((\/)?([\w\s-.]+))*(((\/)?[\w\s-.]+)\.[a-zA-Z0-9]{1,4})?$/gm;
   // select file filePath selector for windows
-  const validWindows = /^([A-Z]:|\\[\w\s-.]+|[\w\s-.]+|..|[A-Z]:[\w\s-.]+)?((\\[\w\s-.]+)+)*((\\)?[\w\s-.]+\.[a-zA-Z0-9]{1,4})$/gm;
+  const validWindows = /^([A-Z]:|\\[\w\s-.]+|[\w\s-.]+|..|[A-Z]:[\w\s-.]+)?((\\[\w\s-.]+)+)*((\\)?[\w\s-.]+\.[a-zA-Z0-9]{1,4})?$/gm;
 
   if (filePath.match(validWindows) !== null) {
     // if return for Windows regex match is the same length as the input filePath
