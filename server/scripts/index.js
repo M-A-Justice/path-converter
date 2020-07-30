@@ -63,14 +63,14 @@ const validPath = (filePath) => {
     // if return for Windows regex match is the same length as the input filePath
     if (filePath.match(validWindows)[0].length === filePath.length) {
       // return input filePath
-      return filePath;
+      return true;
     }
   }
 
   if (filePath.match(validUnix) !== null) {
     // if return for Unix regex match is the same length as the input filePath
     if (filePath.match(validUnix)[0].length === filePath.length) {
-      return filePath;
+      return true;
     }
   }
   // if the filePath doesnt match regex parameters return false
@@ -159,6 +159,9 @@ const whichPath = (filePath) => {
   return filePath;
 };
 
-module.exports = whichPath;
+module.exports = {
+  whichPath,
+  validPath,
+};
 // console.log(whichPath(text));
 // console.log(validPath(text));
