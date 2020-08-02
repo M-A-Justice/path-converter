@@ -57,9 +57,12 @@ const validPath = (filePath) => {
   // select file filePath selector for unix
   // const validUnix = /(^[a-z])?((\/)?([\w\s-.]+))*(((\/)?[\w\s-.]+)\.[a-zA-Z0-9]{1,4})?$/gm;
   // select file filePath selector for windows
-  const validWindows = /^([A-Z]:|\\[\w\s-.]+|[\w\s-.]+|..|[A-Z]:[\w\s-.]+)?((\\[\w\s-.]+)+)*((\\)?[\w\s-.]+\.[a-zA-Z0-9]{1,4})?$/gm;
+  // const validWindows = /^([A-Z]:|\\[\w\s-.]+|[\w\s-.]+|..|[A-Z]:[\w\s-.]+)?((\\[\w\s-.]+)+)*((\\)?[\w\s-.]+\.[a-zA-Z0-9]{1,4})?$/gm;
+  const validWindows = /^(([A-Z]:|\\[\w\s-.]+|[\w\s-.]+|..|[A-Z]:[\w\s-.]+)(\.|\\)?)?(\\[\w\s-.]+\\?)*((\\)?[\w\s-.]+\.[a-zA-Z0-9]{1,4})?$/g;
+  const validUnix = /^([a-z])?(\/[\w\s-.]+\/?)*(\/?[\w\s-.]+\.[a-zA-Z0-9]{1,4})?$/g;
 
-  const validUnix = /^([a-z]\/)?((\/)?[\w\s-.]+\/)*(\/)?([\w\s-.]+\.[a-zA-Z0-9]{1,4})?$/g;
+  // console.log(filePath.match(validUnix));
+  // console.log(filePath.match(validWindows));
 
   if (filePath.length === 0) {
     return false;
@@ -145,7 +148,7 @@ const whichPath = (filePath) => {
   // const windows = /([a-z]:)/i;
   // const unix = /([a-z]\/)/i;
   // if filePath is not valid and filePath is not an empty string return invalidity
-  if (filePath.length > 0 && !validPath(filePath)) {
+  if ((filePath.length > 0 && !validPath(filePath)) || (!filePath.includes('.') && !filePath.includes('/') && !filePath.includes('\\'))) {
     return 'Not a valid path';
   }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import PathForm from './PathForm';
-import { whichPath, validPath } from '../../../server/scripts/index';
+import { whichPath } from '../../../server/scripts/index';
 import {
   Container,
   NavBar,
@@ -37,14 +37,14 @@ class App extends React.Component {
     temp.storage = storage;
     navigator.clipboard.writeText(path)
       .then(() => {
-        temp.storage += 1;
-        if (validPath(path)) {
+        if (path !== 'Not a valid path') {
+          temp.storage += 1;
           window.localStorage[storage] = path;
         }
         this.setState(temp);
       })
       .catch(() => {
-        this.setState({ path: whichPath(value) });
+        this.setState({ path });
       });
   }
 
