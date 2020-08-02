@@ -55,9 +55,15 @@ const text = fs.readFileSync(path.join(__dirname, 'path.txt')).toString('utf-8')
 // filePath validator function
 const validPath = (filePath) => {
   // select file filePath selector for unix
-  const validUnix = /(^[a-z])?((\/)?([\w\s-.]+))*(((\/)?[\w\s-.]+)\.[a-zA-Z0-9]{1,4})?$/gm;
+  // const validUnix = /(^[a-z])?((\/)?([\w\s-.]+))*(((\/)?[\w\s-.]+)\.[a-zA-Z0-9]{1,4})?$/gm;
   // select file filePath selector for windows
   const validWindows = /^([A-Z]:|\\[\w\s-.]+|[\w\s-.]+|..|[A-Z]:[\w\s-.]+)?((\\[\w\s-.]+)+)*((\\)?[\w\s-.]+\.[a-zA-Z0-9]{1,4})?$/gm;
+
+  const validUnix = /^([a-z]\/)?((\/)?[\w\s-.]+\/)*(\/)?([\w\s-.]+\.[a-zA-Z0-9]{1,4})?$/g;
+
+  if (filePath.length === 0) {
+    return false;
+  }
 
   if (filePath.match(validWindows) !== null) {
     // if return for Windows regex match is the same length as the input filePath
@@ -138,13 +144,15 @@ const updateWindowsPath = (filePath) => {
 const whichPath = (filePath) => {
   // const windows = /([a-z]:)/i;
   // const unix = /([a-z]\/)/i;
-  if (filePath === '') {
-    return 'Please enter a file path';
-  }
-  // if filePath is not valid return invalidity
-  if (validPath(filePath) === false) {
+  // if filePath is not valid and filePath is not an empty string return invalidity
+  if (filePath.length > 0 && !validPath(filePath)) {
     return 'Not a valid path';
   }
+
+  if (filePath.length === 0 && !validPath(filePath)) {
+    return 'Please enter a file path';
+  }
+
   // if filePath is Unix
   if (filePath.includes('/')) {
     // return windows filePath function result
