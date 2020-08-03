@@ -54,11 +54,9 @@ const text = fs.readFileSync(path.join(__dirname, 'path.txt')).toString('utf-8')
 
 // filePath validator function
 const validPath = (filePath) => {
-  // select file filePath selector for unix
-  // const validUnix = /(^[a-z])?((\/)?([\w\s-.]+))*(((\/)?[\w\s-.]+)\.[a-zA-Z0-9]{1,4})?$/gm;
   // select file filePath selector for windows
-  // const validWindows = /^([A-Z]:|\\[\w\s-.]+|[\w\s-.]+|..|[A-Z]:[\w\s-.]+)?((\\[\w\s-.]+)+)*((\\)?[\w\s-.]+\.[a-zA-Z0-9]{1,4})?$/gm;
   const validWindows = /^(([A-Z]:|\\[\w\s-.]+|[\w\s-.]+|..|[A-Z]:[\w\s-.]+)(\.|\\)?)?(\\[\w\s-.]+\\?)*((\\)?[\w\s-.]+\.[a-zA-Z0-9]{1,4})?$/g;
+  // select file filePath selector for unix
   const validUnix = /^([a-z])?(\/[\w\s-.]+\/?)*(\/?[\w\s-.]+\.[a-zA-Z0-9]{1,4})?$/g;
 
   // console.log(filePath.match(validUnix));
@@ -122,7 +120,6 @@ const updateWindowsPath = (filePath) => {
   // const directory = /^(\/[\w\s-.]+)\//;
   // const file = /^((\/)?[\w\s-.]+).[a-zA-Z0-9]{1,4}/;
 
-  // FIX THIS FUNCTION
   if (mount.test(filePath)) {
     filePath = filePath.replace(/^(\/mnt\/)([a-z])/, '$2:').replace(/(\/+)/g, '\\');
     filePath = filePath.charAt(0).toUpperCase() + filePath.slice(1);

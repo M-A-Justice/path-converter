@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { Form, Input } from '../styles/PathForm.stlye';
 
 class PathForm extends React.Component {
   constructor(props) {
@@ -27,11 +28,9 @@ class PathForm extends React.Component {
   render() {
     const { value } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="path">
-          <input type="text" id="path" value={value} onChange={this.handleChange} />
-        </label>
-      </form>
+      <Form onSubmit={this.handleSubmit}>
+        <Input type="text" id="path" placeholder="Please enter a file path!" value={value} onChange={this.handleChange} />
+      </Form>
     );
   }
 }

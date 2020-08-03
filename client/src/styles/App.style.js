@@ -10,7 +10,6 @@ export const Container = styled.div`
 export const NavBar = styled.div`
   display: flex;
   height: 100px;
-  width: 100%;
   margin: 5px;
   border: 2px solid black;
   justify-content: space-between;
@@ -40,6 +39,10 @@ export const Display = styled.p`
 `;
 
 export const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 10%;
 `;
 
 export const Instructions = styled.p`

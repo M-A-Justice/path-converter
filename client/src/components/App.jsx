@@ -1,5 +1,7 @@
 import React from 'react';
+// import Draggable, {DraggableCore} from 'react-draggable';
 import PathForm from './PathForm';
+import Draggables from './Draggables';
 import { whichPath } from '../../../server/scripts/index';
 import {
   Container,
@@ -66,6 +68,7 @@ class App extends React.Component {
           <div>{path}</div>
         </FormContainer>
         <hr />
+        <Draggables />
       </Container>
     );
   }
