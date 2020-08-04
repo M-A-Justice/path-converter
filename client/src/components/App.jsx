@@ -21,6 +21,7 @@ class App extends React.Component {
     this.state = {
       path: '',
       storage: 0,
+      counts: [],
     };
 
     this.pathConvert = this.pathConvert.bind(this);
@@ -28,7 +29,18 @@ class App extends React.Component {
 
   componentDidMount() {
     const local = window.localStorage.length;
-    this.setState({ storage: local });
+    const keys = Object.keys(localStorage).sort((a, b) => b - a);
+    const paths = [];
+    const counts = [];
+    let count = 0;
+    if (keys !== undefined) {
+      keys.forEach((element) => {
+        paths.push({ path: localStorage[element] });
+        counts.push(count);
+        count += 1;
+      });
+    }
+    this.setState({ storage: local, counts });
   }
 
   pathConvert(value) {
@@ -51,7 +63,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { path } = this.state;
+    const { path, counts } = this.state;
     return (
       <Container>
         <NavBar>
@@ -68,7 +80,7 @@ class App extends React.Component {
           <div>{path}</div>
         </FormContainer>
         <hr />
-        <Draggables />
+        <Draggables counts={counts} />
       </Container>
     );
   }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ReactSortable } from 'react-sortablejs';
+import { Swappable, Trash } from '../styles/Draggables.style';
 
 const Draggables = () => {
   const [paths, setPaths] = useState([]);
@@ -25,7 +26,10 @@ const Draggables = () => {
       delay={2}
     >
       {paths.map((path) => (
-        <div key={path.id}>{path.path}</div>
+        <Swappable key={path.id}>
+          {path.path}
+          <Trash />
+        </Swappable>
       ))}
     </ReactSortable>
   );
