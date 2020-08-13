@@ -1,94 +1,4 @@
-// import React from 'react';
-// import PathForm from './PathForm';
-// import Draggables from './Draggables';
-// import { whichPath } from '../../../server/scripts/index';
-// import {
-//   Container,
-//   NavBar,
-//   Title,
-//   NavCenter,
-//   Emblem,
-//   Display,
-//   FormContainer,
-//   Instructions,
-// } from '../styles/App.style';
-
-// class App extends React.Component {
-//   constructor(props) {
-//     super(props);
-
-//     this.state = {
-//       path: '',
-//       storage: 0,
-//       filePaths: [],
-//     };
-
-//     this.pathConvert = this.pathConvert.bind(this);
-//   }
-
-//   componentDidMount() {
-//     const local = window.localStorage.length;
-//     const keys = Object.keys(localStorage).sort((a, b) => b - a);
-//     const filePaths = [];
-//     let count = 0;
-//     if (keys !== undefined) {
-//       keys.forEach((element) => {
-//         filePaths.push({ id: count, path: localStorage[element] });
-//         count += 1;
-//       });
-//     }
-//     this.setState({ storage: local, filePaths });
-//   }
-
-//   pathConvert(value) {
-//     const path = whichPath(value);
-//     const { storage, filePaths } = this.state;
-//     const temp = {};
-//     temp.path = path;
-//     temp.storage = storage;
-//     temp.filePaths = filePaths;
-//     navigator.clipboard.writeText(path)
-//       .then(() => {
-//         if (path !== 'Not a valid path') {
-//           temp.filePaths.push({ id: storage, path });
-//           temp.storage += 1;
-//           window.localStorage[storage] = path;
-//         }
-//         this.setState(temp);
-//       })
-//       .catch(() => {
-//         this.setState({ path });
-//       });
-//   }
-
-//   render() {
-//     const { path, filePaths } = this.state;
-//     return (
-//       <Container>
-//         <NavBar>
-//           <Title />
-//           <NavCenter>
-//             <Display>Stuff n Things</Display>
-//           </NavCenter>
-//           <Emblem />
-//         </NavBar>
-//         <hr />
-//         <FormContainer>
-//           <Instructions>Chicken</Instructions>
-//           <PathForm pathConvert={this.pathConvert} />
-//           <div>{path}</div>
-//         </FormContainer>
-//         <hr />
-//         <Draggables filePaths={filePaths} />
-//       </Container>
-//     );
-//   }
-// }
-
-// export default App;
-
-import React from 'react';
-// import Draggable, {DraggableCore} from 'react-draggable';
+import React, { useEffect, useState } from 'react';
 import PathForm from './PathForm';
 import Draggables from './Draggables';
 import { whichPath } from '../../../server/scripts/index';
@@ -103,61 +13,68 @@ import {
   Instructions,
 } from '../styles/App.style';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      path: '',
-      storage: 0,
-    };
-    this.pathConvert = this.pathConvert.bind(this);
-  }
+const App = () => {
+  const initState = [];
 
-  componentDidMount() {
-    const local = window.localStorage.length;
-    this.setState({ storage: local });
-  }
+  const [path, setPath] = useState('');
+  const [paths, setPaths] = useState(initState);
 
-  pathConvert(value) {
-    const path = whichPath(value);
-    const { storage } = this.state;
-    const temp = {};
-    temp.path = path;
-    temp.storage = storage;
-    navigator.clipboard.writeText(path)
-      .then(() => {
-        if (path !== 'Not a valid path') {
-          temp.storage += 1;
-          window.localStorage[storage] = path;
-        }
-        this.setState(temp);
-      })
-      .catch(() => {
-        this.setState({ path });
+  useEffect(() => {
+    const copyOfPaths = [...paths];
+    for (let i = 0; i < window.localStorage.length; i += 1) {
+      const storedVal = localStorage.getItem(localStorage.key(i));
+      copyOfPaths.push({
+        id: i,
+        path: storedVal,
       });
-  }
+    }
+    setPaths(copyOfPaths);
+  }, []);
 
-  render() {
-    const { path } = this.state;
-    return (
-      <Container>
-        <NavBar>
-          <Title />
-          <NavCenter>
-            <Display>Stuff n Things</Display>
-          </NavCenter>
-          <Emblem />
-        </NavBar>
-        <hr />
-        <FormContainer>
-          <Instructions>Chicken</Instructions>
-          <PathForm pathConvert={this.pathConvert} />
-          <div>{path}</div>
-        </FormContainer>
-        <hr />
-        <Draggables />
-      </Container>
-    );
-  }
-}
+  const pathConvert = (value) => {
+    const filePath = whichPath(value);
+    setPath(filePath);
+    if (filePath !== 'Please enter a file path' && filePath !== 'Not a valid path') {
+      navigator.clipboard.writeText(filePath)
+        .then(() => {
+          // activate modal
+          console.log(`${filePath} successfully copied`);
+        })
+        .catch(() => {
+          // sad face
+          console.log(`Unable to copy ${filePath}`);
+        });
+      const pathsCopy = [...paths];
+      const nextIdx = window.localStorage.length;
+      const newPath = {
+        id: nextIdx,
+        path: filePath,
+      };
+      pathsCopy.push(newPath);
+      setPaths(pathsCopy);
+      window.localStorage.setItem(nextIdx, filePath);
+    }
+  };
+
+  return (
+    <Container>
+      <NavBar>
+        <Title />
+        <NavCenter>
+          <Display>Stuff n Things</Display>
+        </NavCenter>
+        <Emblem />
+      </NavBar>
+      <hr />
+      <FormContainer>
+        <Instructions>Chicken</Instructions>
+        <PathForm pathConvert={pathConvert} />
+        <div>{path}</div>
+      </FormContainer>
+      <hr />
+      <Draggables path={path} paths={paths} setPaths={setPaths} />
+    </Container>
+  );
+};
+
 export default App;
