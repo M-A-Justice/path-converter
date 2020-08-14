@@ -1,7 +1,12 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { ReactSortable } from 'react-sortablejs';
-import { Swappable, Trash } from '../styles/Draggables.style';
+import {
+  Swappable,
+  TrashContainer,
+  PathContainer,
+  TrashCan,
+} from '../styles/Draggables.style';
 
 const Draggables = (props) => {
   const { paths } = props;
@@ -9,6 +14,7 @@ const Draggables = (props) => {
 
   return (
     <ReactSortable
+      className="sortable"
       list={paths}
       group="filePaths"
       setList={setPaths}
@@ -17,8 +23,12 @@ const Draggables = (props) => {
     >
       {paths.map((path) => (
         <Swappable key={path.id}>
-          {path.path}
-          <Trash />
+          <PathContainer>
+            {path.path}
+          </PathContainer>
+          <TrashContainer>
+            <TrashCan />
+          </TrashContainer>
         </Swappable>
       ))}
     </ReactSortable>
