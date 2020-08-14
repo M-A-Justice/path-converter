@@ -1,34 +1,34 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react/prop-types */
+import React from 'react';
 import { ReactSortable } from 'react-sortablejs';
-import { Swappable, Trash } from '../styles/Draggables.style';
+import {
+  Swappable,
+  TrashContainer,
+  PathContainer,
+  TrashCan,
+} from '../styles/Draggables.style';
 
-const Draggables = () => {
-  const [paths, setPaths] = useState([]);
-
-  useEffect(() => {
-    const keys = Object.keys(localStorage).sort((a, b) => b - a);
-    let count = 0;
-    if (keys !== undefined) {
-      keys.forEach((element) => {
-        paths.push({ id: count, path: localStorage[element] });
-        count += 1;
-      });
-    }
-    setPaths(paths);
-  }, []);
+const Draggables = (props) => {
+  const { paths } = props;
+  const { setPaths } = props;
 
   return (
     <ReactSortable
+      className="sortable"
       list={paths}
-      setList={setPaths}
       group="filePaths"
+      setList={setPaths}
       animation={200}
       delay={2}
     >
       {paths.map((path) => (
         <Swappable key={path.id}>
-          {path.path}
-          <Trash />
+          <PathContainer>
+            {path.path}
+          </PathContainer>
+          <TrashContainer>
+            <TrashCan />
+          </TrashContainer>
         </Swappable>
       ))}
     </ReactSortable>

@@ -144,13 +144,13 @@ const updateWindowsPath = (filePath) => {
 const whichPath = (filePath) => {
   // const windows = /([a-z]:)/i;
   // const unix = /([a-z]\/)/i;
-  // if filePath is not valid and filePath is not an empty string return invalidity
-  if ((filePath.length > 0 && !validPath(filePath)) || (!filePath.includes('.') && !filePath.includes('/') && !filePath.includes('\\'))) {
-    return 'Not a valid path';
-  }
 
   if (filePath.length === 0 && !validPath(filePath)) {
     return 'Please enter a file path';
+  }
+  // if filePath is not valid and filePath is not an empty string return invalidity
+  if ((filePath.length > 0 && !validPath(filePath)) || (!filePath.includes('.') && !filePath.includes('/') && !filePath.includes('\\'))) {
+    return 'Not a valid path';
   }
 
   // if filePath is Unix
@@ -171,5 +171,3 @@ module.exports = {
   whichPath,
   validPath,
 };
-// console.log(whichPath(text));
-// console.log(validPath(text));
