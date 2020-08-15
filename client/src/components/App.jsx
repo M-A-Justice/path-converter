@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import PathForm from './PathForm';
 import Draggables from './Draggables';
+import Modal from './Modal';
 import { whichPath } from '../../../server/scripts/index';
 import {
   Container,
@@ -19,6 +20,7 @@ const App = () => {
 
   const [path, setPath] = useState('');
   const [paths, setPaths] = useState(initState);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const copyOfPaths = [...paths];
@@ -39,7 +41,9 @@ const App = () => {
       navigator.clipboard.writeText(filePath)
         .then(() => {
           // activate modal
-          console.log(`${filePath} successfully copied`);
+          const toOpen = !open;
+          setOpen(toOpen);
+          // console.log(`${filePath} successfully copied`);
         })
         .catch(() => {
           // sad face
@@ -56,7 +60,6 @@ const App = () => {
       window.localStorage.setItem(nextIdx, filePath);
     }
   };
-
   return (
     <Container>
       <NavBar>
@@ -70,7 +73,7 @@ const App = () => {
       <FormContainer>
         <Instructions>Chicken</Instructions>
         <PathForm pathConvert={pathConvert} />
-        <div>{path}</div>
+        {open ? <Modal path={path} open={open} setOpen={setOpen} /> : <div />}
       </FormContainer>
       <hr />
       <Draggables path={path} paths={paths} setPaths={setPaths} />
