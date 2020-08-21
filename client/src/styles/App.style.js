@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Modal from '../components/Modal';
 
 export const Container = styled.div`
   height: 100%;
@@ -47,8 +46,4 @@ export const FormContainer = styled.div`
 `;
 
 export const Instructions = styled.p`
-`;
-
-export const ClosedModal = styled(Modal)`
-  display: none;
 `;

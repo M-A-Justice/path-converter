@@ -9,8 +9,35 @@ import {
 } from '../styles/Draggables.style';
 
 const Draggables = (props) => {
-  const { paths } = props;
-  const { setPaths } = props;
+  const { paths, setPaths } = props;
+
+  const handleClick = (e) => {
+    let data = e.target.parentNode;
+    while (data.dataset.id === undefined) {
+      data = data.parentNode;
+    }
+    let { id } = data.dataset;
+    const tempState = [];
+
+    id = Number(id);
+
+    localStorage.clear();
+    paths.forEach((path) => {
+      if (path.id !== id) {
+        if (path.id > id) {
+          const tempObj = path;
+          tempObj.id -= 1;
+          tempState.push(tempObj);
+        } else {
+          tempState.push(path);
+        }
+      }
+    });
+    tempState.forEach((path) => {
+      localStorage[path.id] = path.path;
+    });
+    setPaths(tempState);
+  };
 
   return (
     <ReactSortable
@@ -26,7 +53,7 @@ const Draggables = (props) => {
           <PathContainer>
             {path.path}
           </PathContainer>
-          <TrashContainer>
+          <TrashContainer onClick={handleClick}>
             <TrashCan />
           </TrashContainer>
         </Swappable>

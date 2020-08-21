@@ -22,6 +22,9 @@ class PathForm extends React.Component {
     const { value } = this.state;
     const { pathConvert } = this.props;
     pathConvert(value);
+    this.setState({
+      value: '',
+    });
     e.preventDefault();
   }
 
