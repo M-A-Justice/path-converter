@@ -25,7 +25,7 @@ const App = () => {
   useEffect(() => {
     const copyOfPaths = [...paths];
     for (let i = 0; i < window.localStorage.length; i += 1) {
-      const storedVal = localStorage.getItem(localStorage.key(i));
+      const storedVal = localStorage[i];
       copyOfPaths.push({
         id: i,
         path: storedVal,
@@ -40,13 +40,10 @@ const App = () => {
     if (filePath !== 'Please enter a file path' && filePath !== 'Not a valid path') {
       navigator.clipboard.writeText(filePath)
         .then(() => {
-          // activate modal
           const toOpen = !open;
           setOpen(toOpen);
-          // console.log(`${filePath} successfully copied`);
         })
         .catch(() => {
-          // sad face
           console.log(`Unable to copy ${filePath}`);
         });
       const pathsCopy = [...paths];

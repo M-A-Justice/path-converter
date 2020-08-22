@@ -39,6 +39,21 @@ const Draggables = (props) => {
     setPaths(tempState);
   };
 
+  const handleRelease = () => {
+    localStorage.clear();
+    let count = 0;
+    const tempState = [];
+    paths.forEach((path) => {
+      tempState.push(path);
+      tempState[count].id = count;
+      count += 1;
+    });
+    tempState.forEach((path) => {
+      localStorage[path.id] = path.path;
+    });
+    setPaths(tempState);
+  };
+
   return (
     <ReactSortable
       className="sortable"
@@ -49,7 +64,7 @@ const Draggables = (props) => {
       delay={2}
     >
       {paths.map((path) => (
-        <Swappable key={path.id}>
+        <Swappable key={path.id} onDragEnd={handleRelease}>
           <PathContainer>
             {path.path}
           </PathContainer>
