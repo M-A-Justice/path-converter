@@ -42,8 +42,8 @@ export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 10%;
+  height: fit-content;
 `;
 
-export const Instructions = styled.p`
+export const Instructions = styled.div`
 `;

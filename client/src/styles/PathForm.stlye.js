@@ -4,7 +4,7 @@ export const Form = styled.form`
   width: 100%;
   display: flex;
   justify-content: center;
-  height: 100%;
+  height: 7vh;
 `;
 
 export const Input = styled.input`

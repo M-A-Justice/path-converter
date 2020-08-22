@@ -68,12 +68,38 @@ const App = () => {
       </NavBar>
       <hr />
       <FormContainer>
-        <Instructions>Chicken</Instructions>
+        <Instructions>
+          <h3><b>How to use:</b></h3>
+          <ul>
+            <li>
+              Input the filepath you want to convert into the text field.
+            </li>
+            <li>
+              When filepath is submitted it will be detected and converted and copied to clipboard.
+            </li>
+            <li>
+              You can drag your filepaths around to rearrange them as you like!
+            </li>
+            <li>
+              Click on one of your filepaths to copy it to the clipboard.
+            </li>
+            <li>
+              If you&#39;re done with a filepath just click on the trashcan to get rid of it!
+            </li>
+          </ul>
+        </Instructions>
         <PathForm pathConvert={pathConvert} />
         {open ? <Modal path={path} open={open} setOpen={setOpen} /> : <div />}
       </FormContainer>
       <hr />
-      <Draggables path={path} paths={paths} setPaths={setPaths} />
+      <Draggables
+        setPath={setPath}
+        open={open}
+        setOpen={setOpen}
+        path={path}
+        paths={paths}
+        setPaths={setPaths}
+      />
     </Container>
   );
 };

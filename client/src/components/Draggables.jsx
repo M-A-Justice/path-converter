@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { ReactSortable } from 'react-sortablejs';
@@ -9,7 +10,13 @@ import {
 } from '../styles/Draggables.style';
 
 const Draggables = (props) => {
-  const { paths, setPaths } = props;
+  const {
+    paths,
+    setPaths,
+    open,
+    setOpen,
+    setPath,
+  } = props;
 
   const handleClick = (e) => {
     let data = e.target.parentNode;
@@ -54,6 +61,21 @@ const Draggables = (props) => {
     setPaths(tempState);
   };
 
+  const handleCopy = (e) => {
+    if (e.target.parentNode.className.includes('new-copy') && e.target.nodeName === 'DIV') {
+      const filePath = e.target.textContent;
+      setPath(filePath);
+      navigator.clipboard.writeText(filePath)
+        .then(() => {
+          const toOpen = !open;
+          setOpen(toOpen);
+        })
+        .catch(() => {
+          console.log(`Unable to copy ${filePath}`);
+        });
+    }
+  };
+
   return (
     <ReactSortable
       className="sortable"
@@ -64,7 +86,7 @@ const Draggables = (props) => {
       delay={2}
     >
       {paths.map((path) => (
-        <Swappable key={path.id} onDragEnd={handleRelease}>
+        <Swappable className="new-copy" key={path.id} onDragEnd={handleRelease} onClick={handleCopy}>
           <PathContainer>
             {path.path}
           </PathContainer>

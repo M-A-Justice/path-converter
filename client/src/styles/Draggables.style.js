@@ -12,6 +12,7 @@ export const Swappable = styled.div`
   /* text-overflow: ellipsis; */
   white-space: nowrap;
   box-shadow: 3px 3px 6px -6px midnightblue;
+  cursor: pointer;
 `;
 
 export const TrashContainer = styled.button`
@@ -24,6 +25,7 @@ export const TrashContainer = styled.button`
   justify-content: center;
   align-items: center;
   box-shadow: inset 0px 0px 3px 0px midnightblue;
+  cursor: pointer;
 `;
 
 export const PathContainer = styled.div`
