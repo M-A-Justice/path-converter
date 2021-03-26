@@ -1,17 +1,17 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import {
-  ModalMain,
-  ModalClose,
+  CopyModalMain,
+  CopyModalClose,
   Exit,
-  ModalInfo,
-  ModalBody,
-  ModalPath,
-  ModalText,
+  CopyModalInfo,
+  CopyModalBody,
+  CopyModalPath,
+  CopyModalText,
   ButtonContainer,
-} from '../styles/Modal.style';
+} from '../styles/CopyModal.style';
 
-const Modal = (props) => {
+const CopyModal = (props) => {
   const { path, open, setOpen } = props;
 
   const handleClick = (event) => {
@@ -28,24 +28,24 @@ const Modal = (props) => {
   };
 
   return (
-    <ModalBody className="exit" onClick={handleClick}>
-      <ModalMain>
+    <CopyModalBody className="exit" onClick={handleClick}>
+      <CopyModalMain>
         <ButtonContainer>
-          <ModalClose className="exit" onClick={buttonClick}>
+          <CopyModalClose className="exit" onClick={buttonClick}>
             <Exit />
-          </ModalClose>
+          </CopyModalClose>
         </ButtonContainer>
-        <ModalInfo>
-          <ModalPath>
+        <CopyModalInfo>
+          <CopyModalPath>
             {path}
-          </ModalPath>
-          <ModalText>
+          </CopyModalPath>
+          <CopyModalText>
             Successfully copied to clipboard!
-          </ModalText>
-        </ModalInfo>
-      </ModalMain>
-    </ModalBody>
+          </CopyModalText>
+        </CopyModalInfo>
+      </CopyModalMain>
+    </CopyModalBody>
   );
 };
 
-export default Modal;
+export default CopyModal;

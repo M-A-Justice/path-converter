@@ -13,8 +13,8 @@ const Draggables = (props) => {
   const {
     paths,
     setPaths,
-    open,
-    setOpen,
+    openCopy,
+    setOpenCopy,
     setPath,
   } = props;
 
@@ -67,8 +67,8 @@ const Draggables = (props) => {
       setPath(filePath);
       navigator.clipboard.writeText(filePath)
         .then(() => {
-          const toOpen = !open;
-          setOpen(toOpen);
+          const toOpenCopy = !openCopy;
+          setOpenCopy(toOpenCopy);
         })
         .catch(() => {
           console.log(`Unable to copy ${filePath}`);

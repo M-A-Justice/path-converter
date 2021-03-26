@@ -3,16 +3,14 @@ import { Trash } from '@styled-icons/bootstrap/Trash';
 
 export const Swappable = styled.div`
   display: flex;
-  border: 2px solid black;
-  border-radius: 10px;
-  height: 10%;
-  width: 40%;
+  height: 75%;
+  width: 75%;
   margin: 1%;
   overflow: hidden;
-  /* text-overflow: ellipsis; */
   white-space: nowrap;
-  box-shadow: 3px 3px 6px -6px midnightblue;
+  box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.25);;
   cursor: pointer;
+  max-height: 110px;
 `;
 
 export const TrashContainer = styled.button`
@@ -20,11 +18,9 @@ export const TrashContainer = styled.button`
   width: 10%;
   height: 100%;
   border: none;
-  border-left: 2px solid black;
-  background-color: azure;
+  background-color: #7D8597;
   justify-content: center;
   align-items: center;
-  box-shadow: inset 0px 0px 3px 0px midnightblue;
   cursor: pointer;
 `;
 
@@ -34,10 +30,10 @@ export const PathContainer = styled.div`
   width: 84%;
   word-break: break-word;
   padding: 3%;
-  background-color: ghostwhite;
-  box-shadow: inset 0px 0px 7px -2px midnightblue;
+  background-color: #7D8597;
 `;
 
 export const TrashCan = styled(Trash)`
   height: 50%;
+  color: #001233;
 `;

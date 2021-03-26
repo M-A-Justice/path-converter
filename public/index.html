@@ -3,18 +3,18 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sarpanch&display=swap" rel="stylesheet">
     <style type="text/css">
       .sortable {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        flex-wrap: wrap;
-        height: 50%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        justify-items: center;
       }
     </style>
     <title>Path Converter</title>
   </head>
-  <body style="height: 100%; margin: 0px;">
+  <body style="height: 100%; margin: 0px; background-color: #0466C8;">
     <div id="app" style="height: 100%;"></div>
     <script src="dist/bundle.js"></script>
   </body>

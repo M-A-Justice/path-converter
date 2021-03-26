@@ -1,13 +1,13 @@
+/* eslint-disable no-console */
 const express = require('express');
-const bodyParser = require('body-parser');
 const path = require('path');
 
 const app = express();
 
-const PORT = 3000;
+const PORT = 8000;
 
 app.use('/', express.static(path.join(__dirname, '..', 'public')));
 
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.listen(PORT, () => console.log(`Server listening on port: ${PORT}!`));
