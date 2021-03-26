@@ -7,12 +7,14 @@ import {
   TitleUpper,
   TitleLower,
   InstructionHover,
+  Empty,
 } from '../styles/Header.style';
 import InfoModal from './InfoModal';
 
 const Header = (props) => {
+  const { openInfo, setOpenInfo } = props;
+
   const handleHover = () => {
-    const { openInfo, setOpenInfo } = props;
     const toOpenInfo = !openInfo;
     setOpenInfo(toOpenInfo);
   };
@@ -27,12 +29,12 @@ const Header = (props) => {
           C:\onverter
         </TitleLower>
       </TitleContainer>
-      <InstructContainer onMouseEnter={handleHover} onMouseLeave={handleHover}>
-        <InstructionHover>
+      <InstructContainer>
+        <InstructionHover onMouseEnter={handleHover} onMouseLeave={handleHover}>
           ?
         </InstructionHover>
       </InstructContainer>
-      <InfoModal />
+      {openInfo ? <InfoModal /> : <Empty />}
     </NavBar>
   );
 };

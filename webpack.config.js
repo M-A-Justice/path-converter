@@ -15,13 +15,6 @@ module.exports = {
           'babel-loader',
         ],
       },
-      // {
-      //   test: /\.(png)$/,
-      //   loader: 'file-loader',
-      //   options: {
-      //     outputPath: 'images',
-      //   },
-      // },
     ],
   },
   resolve: {

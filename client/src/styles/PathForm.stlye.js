@@ -14,6 +14,8 @@ export const Input = styled.input`
   background: #979DAC;
   border: 5px solid #33415C;
   filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.25));
+  color: #33415C;
+  font-size: 1vmax;
   ::placeholder {
     color: #33415C;
     font-family: Sarpanch;

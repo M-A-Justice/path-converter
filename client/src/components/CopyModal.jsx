@@ -12,19 +12,19 @@ import {
 } from '../styles/CopyModal.style';
 
 const CopyModal = (props) => {
-  const { path, open, setOpen } = props;
+  const { path, openCopy, setOpenCopy } = props;
 
   const handleClick = (event) => {
     const { className } = event.target;
     if (typeof className === 'string' && className.includes('exit')) {
-      const close = !open;
-      setOpen(close);
+      const closeCopy = !openCopy;
+      setOpenCopy(closeCopy);
     }
   };
 
   const buttonClick = () => {
-    const close = !open;
-    setOpen(close);
+    const closeCopy = !openCopy;
+    setOpenCopy(closeCopy);
   };
 
   return (

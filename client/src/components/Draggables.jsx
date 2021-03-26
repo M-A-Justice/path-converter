@@ -62,6 +62,9 @@ const Draggables = (props) => {
   };
 
   const handleCopy = (e) => {
+    if (e.target.parentNode.nodeName === 'svg') {
+      return;
+    }
     if (e.target.parentNode.className.includes('new-copy') && e.target.nodeName === 'DIV') {
       const filePath = e.target.textContent;
       setPath(filePath);

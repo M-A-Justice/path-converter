@@ -4,7 +4,7 @@ import { CloseOutline } from '@styled-icons/evaicons-outline/CloseOutline';
 export const CopyModalBody = styled.div`
   display: flex;
   background-color: rgba(0, 18, 51, 0.40);
-  z-index: 1;
+  z-index: 3;
   position: fixed;
   height: 100%;
   width: 100%;
@@ -16,7 +16,6 @@ export const CopyModalBody = styled.div`
 
 export const CopyModalMain = styled.div`
   background-color: #979DAC;
-  z-index: 2;
   position: relative;
   height: fit-content;
   max-width: 565px;

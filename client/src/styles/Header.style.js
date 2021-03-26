@@ -40,8 +40,13 @@ export const InstructionHover = styled.div`
   text-align: center;
   border: 4px solid #ADB5FF;
   font-size: 1.6vmax;
+  z-index: 3;
 
   &:hover {
     cursor: pointer;
   }
+`;
+
+export const Empty = styled.div`
+  position: fixed;
 `;
